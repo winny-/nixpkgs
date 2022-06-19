@@ -7,6 +7,18 @@
 
 # Perl libraries
 , LWP
+, LWPProtocolHttps
+, HTTPMessage
+, HTTPDate
+, URI
+, TryTiny
+
+, gnutar
+, xz
+, curl # Preferred to using the Perl HTTP libs - according to hw-probe.
+, iproute2
+, coreutils
+, gnugrep
 
 # Required
 , perl
@@ -71,6 +83,12 @@ stdenv.mkDerivation rec {
         pciutils
         usbutils
         edid-decode
+        iproute2 # (ip)
+        coreutils # (sort)
+        gnugrep
+        curl
+        gnutar
+        xz
       ];
       recommendedPrograms = [
         mcelog
@@ -103,7 +121,7 @@ stdenv.mkDerivation rec {
         ++ lib.optionals withRecommended recommendedPrograms
         ++ lib.optionals withSuggested suggestedPrograms;
     in [
-      "--set" "PERL5LIB" "${makePerlPath [ LWP ]}"
+      "--set" "PERL5LIB" "${makePerlPath [ LWP LWPProtocolHttps HTTPMessage URI HTTPDate TryTiny ]}"
       "--prefix" "PATH" ":" "${lib.makeBinPath programs}"
     ];
 
