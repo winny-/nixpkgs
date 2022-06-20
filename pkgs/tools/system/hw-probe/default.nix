@@ -19,6 +19,7 @@
 , iproute2
 , coreutils
 , gnugrep
+, kmod
 
 # Required
 , perl
@@ -89,6 +90,7 @@ stdenv.mkDerivation rec {
         curl
         gnutar
         xz
+        kmod # (lsmod)
       ];
       recommendedPrograms = [
         mcelog
